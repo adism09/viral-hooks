@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viral Hook Generator | Creator Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: white; }
+        .gradient-text { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
+
+    <div class="max-w-2xl w-full text-center">
+        <h1 class="text-4xl md:text-6xl font-black mb-4">
+            <span class="gradient-text">VIRAL HOOK</span> GENERATOR
+        </h1>
+        <p class="text-slate-400 mb-8">Stop the scroll. Generate high-converting hooks for TikTok, Reels, and Shorts in seconds.</p>
+
+        <div class="bg-slate-800 p-8 rounded-3xl shadow-2xl border border-slate-700">
+            
+            <div class="mb-6">
+                <label class="block text-left text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Topic / Niche</label>
+                <input type="text" id="topicInput" placeholder="e.g. Fitness, AI, Making Money..." 
+                    class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white transition-all">
+            </div>
+
+            <div class="flex gap-4 mb-8">
+                <select id="langSelect" class="bg-slate-700 rounded-xl px-4 py-3 focus:outline-none cursor-pointer">
+                    <option value="en">🇺🇸 English</option>
+                    <option value="es">🇪🇸 Español</option>
+                </select>
+                <button onclick="generateHook()" class="flex-1 bg-blue-600 hover:bg-blue-500 font-bold py-3 rounded-xl transition-all transform active:scale-95 shadow-lg shadow-blue-500/20">
+                    Generate Hook ✨
+                </button>
+            </div>
+
+            <div id="resultContainer" class="hidden bg-slate-900 border-2 border-dashed border-slate-700 p-6 rounded-2xl relative group">
+                <p id="hookResult" class="text-xl md:text-2xl font-bold leading-tight italic"></p>
+                <button onclick="copyToClipboard()" class="mt-4 text-sm text-blue-400 hover:text-white font-medium flex items-center justify-center gap-2 mx-auto">
+                    <span id="copyText">Click to Copy</span>
+                </button>
+            </div>
+        </div>
+
+        <footer class="mt-12 text-slate-500 text-sm">
+            &copy; 2026 HookGen Tool • Optimized for High Engagement
+        </footer>
+    </div>
+
+    <script>
+        const hooks = {
+            en: [
+                "The secret to [TOPIC] that nobody tells you...",
+                "Stop doing [TOPIC] this way, it's killing your results.",
+                "I tried [TOPIC] for 30 days so you don't have to.",
+                "If you want [RESULT], you need to start doing [TOPIC] today.",
+                "This is the most underrated [TOPIC] hack in 2026."
+            ],
+            es: [
+                "Lo que nadie te dice sobre [TOPIC]...",
+                "Deja de hacer [TOPIC] así, estás arruinando tus resultados.",
+                "Probé [TOPIC] por 30 días para que tú no tengas que hacerlo.",
+                "Si quieres [RESULT], tienes que empezar con [TOPIC] hoy mismo.",
+                "Este es el truco más infravalorado de [TOPIC] en 2026."
+            ]
+        };
+
+        function generateHook() {
+            const topic = document.getElementById('topicInput').value || '...';
+            const lang = document.getElementById('langSelect').value;
+            const randomHook = hooks[lang][Math.floor(Math.random() * hooks[lang].length)];
+            
+            // Logic to replace placeholders
+            let finalHook = randomHook.replace("[TOPIC]", topic);
+            // Added a dummy [RESULT] logic for demonstration
+            finalHook = finalHook.replace("[RESULT]", "massive growth");
+
+            document.getElementById('hookResult').innerText = finalHook;
+            document.getElementById('resultContainer').classList.remove('hidden');
+            document.getElementById('copyText').innerText = "Click to Copy";
+        }
+
+        function copyToClipboard() {
+            const text = document.getElementById('hookResult').innerText;
+            navigator.clipboard.writeText(text);
+            document.getElementById('copyText').innerText = "✅ Copied!";
+        }
+    </script>
+</body>
+</html>
